@@ -18,7 +18,8 @@ function App() {
           <Row>
             <p>Count : {counter} </p>
           </Row>
-          <Button onClick={() => dispatch(increment())}>Increment</Button>{" "}
+          <Button onClick={() => dispatch(increment())}>Increment</Button>
+          {"  "}
           <Button onClick={() => dispatch(decrement())}>Decrement</Button>
         </Card.Body>
       </Card>
