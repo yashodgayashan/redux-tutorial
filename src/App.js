@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { increment, decrement } from "./actions/counterActions";
 
 function App() {
+  const counter = useSelector(state => state);
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Card style={{ margin: 50, width: "30vw" }}>
+        <Card.Header>Simple Counter</Card.Header>
+        <Card.Body>
+          <Row>
+            <p>Count : {counter} </p>
+          </Row>
+          <Button onClick={() => dispatch(increment())}>Increment</Button>{" "}
+          <Button onClick={() => dispatch(decrement())}>Decrement</Button>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
