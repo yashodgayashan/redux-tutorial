@@ -6,9 +6,11 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import { update, remove } from "./actions/userActions";
+import { increment, decrement } from "./actions/counterActions";
 
 function App() {
-  const user = useSelector(state => state);
+  const counter = useSelector(state => state.counter);
+  const user = useSelector(state => state.userInfo);
   const dispatch = useDispatch();
 
   const [name, setName] = useState(user.name);
@@ -17,6 +19,7 @@ function App() {
   useEffect(() => {
     setName(user.name);
     setAge(user.age);
+    console.log(user);
   }, [user]);
 
   return (
@@ -55,6 +58,16 @@ function App() {
               </Button>
             </Form>
           </Row>
+        </Card.Body>
+      </Card>
+      <Card style={{ margin: 50, width: "30vw" }}>
+        <Card.Header>Simple Counter</Card.Header>
+        <Card.Body>
+          <Row>
+            <p>Count : {counter} </p>
+          </Row>
+          <Button onClick={() => dispatch(increment())}>Increment</Button>{" "}
+          <Button onClick={() => dispatch(decrement())}>Decrement</Button>
         </Card.Body>
       </Card>
     </div>
