@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { createStore } from "redux";
-import reducers from "./reducers/counterReducer";
+import reducers from "./reducers/userInfo";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 

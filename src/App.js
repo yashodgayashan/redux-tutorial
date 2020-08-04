@@ -1,37 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
-import { increment, decrement } from "./actions/counterActions";
+import { update, remove } from "./actions/userActions";
 
 function App() {
-  const counter = useSelector(state => state);
+  const user = useSelector(state => state);
   const dispatch = useDispatch();
-  const [value, setValue] = useState(0);
+
+  const [name, setName] = useState(user.name);
+  const [age, setAge] = useState(user.age);
+
+  useEffect(() => {
+    setName(user.name);
+    setAge(user.age);
+  }, [user]);
 
   return (
     <div>
       <Card style={{ margin: 50, width: "30vw" }}>
-        <Card.Header>Simple Counter</Card.Header>
+        <Card.Header>User Information</Card.Header>
         <Card.Body>
           <Row>
-            <p>Count : {counter} </p>
+            <Form>
+              <Form.Group controlId="formBasicName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="name"
+                  placeholder={name}
+                  onChange={event => setName(event.target.value)}
+                />
+              </Form.Group>
+              <br />
+              <Form.Group controlId="formBasicAge">
+                <Form.Label>Age</Form.Label>
+                <Form.Control
+                  type="age"
+                  placeholder={age}
+                  onChange={event => setAge(event.target.value)}
+                />
+              </Form.Group>
+              <br />
+              <Button
+                variant="primary"
+                onClick={() => dispatch(update(name, age))}
+              >
+                Submit
+              </Button>{" "}
+              <Button variant="danger" onClick={() => dispatch(remove())}>
+                Delete
+              </Button>
+            </Form>
           </Row>
-          <Form>
-            <Form.Group controlId="formBasicValue">
-              <Form.Label>Value</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={value}
-                onChange={event => setValue(event.target.value)}
-              />
-            </Form.Group>
-          </Form>
-          <Button onClick={() => dispatch(increment(value))}>Increment</Button>{" "}
-          <Button onClick={() => dispatch(decrement(value))}>Decrement</Button>
         </Card.Body>
       </Card>
     </div>
